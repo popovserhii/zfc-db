@@ -1,6 +1,6 @@
 {
   "name": "popov/zfc-db",
-  "description": "ZF Adapter for Popov\Db module",
+  "description": "ZF Adapter for Popov\\Db module",
   "type": "library",
   "license": "MIT",
   "keywords": [
