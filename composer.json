@@ -1,0 +1,29 @@
+{
+  "name": "popov/zfc-db",
+  "description": "ZF Adapter for Popov\Db module",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "db",
+    "pdo",
+    "adapter",
+    "multiple save"
+  ],
+  "authors": [
+    {
+      "name": "Serhii Popov",
+      "email": "popow.serhii@gmail.com",
+      "homepage": "http://stagem.com.ua/",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Popov\\ZfcDb\\": "src/"
+    }
+  }
+}
