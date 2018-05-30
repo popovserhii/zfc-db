@@ -19,11 +19,17 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">=5.5"
+    "php": ">=7.0"
   },
   "autoload": {
     "psr-4": {
       "Popov\\ZfcDb\\": "src/"
+    }
+  },
+  "extra": {
+    "zf": {
+      "component": "Popov\\ZfcDb",
+      "config-provider": "Popov\\ZfcDb\\ConfigProvider"
     }
   }
 }
