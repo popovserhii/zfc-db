@@ -16,24 +16,32 @@
 namespace Popov\ZfcDb;
 
 use Psr\Container\ContainerInterface;
+use Doctrine\ORM\EntityManager;
 use Popov\Db\Db;
 
 class DbFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $config = $container->get('config');
-        $dbParams = $config['db'] ?? $config['database'];
+        if ($container->has(EntityManager::class)) {
+            $em = $container->get(EntityManager::class);
+            $pdo = $em->getConnection()->getWrappedConnection();
+            $db = (new Db())->setPdo($pdo);
+        } else {
+            $config = $container->get('config');
+            $dbParams = $config['db'] ?? $config['database'];
 
-        return (new Db([
-            'options' => $dbParams['options'],
-            //'dsn' => sprintf('mysql:dbname=%s;host=%s', $dbParams['database'], $dbParams['hostname']),
-            'username' => $dbParams['username'],
-            'password' => $dbParams['password'],
-            'database' => $dbParams['database'],
-            'hostname' => $dbParams['hostname'],
-            'port' => $dbParams['port'],
-            ]
-        ));
+            $db = new Db([
+                'options' => $dbParams['options'],
+                //'dsn' => sprintf('mysql:dbname=%s;host=%s', $dbParams['database'], $dbParams['hostname']),
+                'username' => $dbParams['username'],
+                'password' => $dbParams['password'],
+                'database' => $dbParams['database'],
+                'hostname' => $dbParams['hostname'],
+                'port' => $dbParams['port'],
+            ]);
+        }
+
+        return $db;
     }
 }
